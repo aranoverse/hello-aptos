@@ -1,0 +1,12 @@
+[package]
+name = 'hello_aptos'
+version = '1.0.0'
+[dependencies.AptosFramework]
+git = 'https://github.com/aptos-labs/aptos-core.git'
+rev = 'main'
+subdir = 'aptos-move/framework/aptos-framework'
+
+[addresses]
+hello_aptos = "0x2"
+aptos_framwork= "0x1"
+
