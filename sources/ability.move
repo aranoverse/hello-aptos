@@ -13,10 +13,11 @@ module hello_aptos::resource {
     fun test_mint(manager: address){
         let signer = account::create_account_for_test(manager);
         managed_coin::initialize<Aranoverse>(&signer, b"Aranoverse", b"AVT", 18, true);
-        coin::register<Aranoverse>(&signer);
-        managed_coin::mint<Aranoverse>(&signer, manager, 100000000000);
 
+        coin::register<Aranoverse>(&signer);
         assert!(coin::is_coin_initialized<Aranoverse>(), 1);
+
+        managed_coin::mint<Aranoverse>(&signer, manager, 100000000000);
         assert!(coin::balance<Aranoverse>(manager) == 100000000000, 2);
 
         // Could not compile , Cannot ignore values without the 'drop' ability. The value must be used
