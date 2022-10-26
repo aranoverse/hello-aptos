@@ -11,21 +11,26 @@ module hello_aptos::counter {
             move_to(signer, Counter { value: 0 });
         };
 
-        let r = borrow_global_mut<Counter>(address_of(signer));
+        let r = borrow_global_mut<Counter>(addr);
         r.value = r.value + 1;
+    }
+
+    public fun increment2(addr: address) acquires Counter {
+        let r = borrow_global_mut<Counter>(addr);
+        r.value = r.value + 1;
+    }
+
+    spec increment2 {
+        let conter = global<Counter>(addr).value;
+
+
+        let post conter_post = global<Counter>(addr).value;
+        ensures conter_post == conter + 1;
     }
 
 
     public fun counter(addr: address): u8 acquires Counter {
         borrow_global<Counter>(addr).value
-    }
-
-    spec increment {
-        let conter = global<Counter>(address_of(signer)).value;
-
-
-        let post conter_post = global<Counter>(address_of(signer)).value;
-        ensures conter_post == conter + 1;
     }
 
 
